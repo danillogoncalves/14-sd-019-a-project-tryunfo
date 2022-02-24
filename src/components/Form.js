@@ -46,6 +46,8 @@ class Form extends Component {
             id="attr1Id"
             name="attr1"
             type="number"
+            minLength={ 1 }
+            maxLength={ 90 }
             value={ cardAttr1 }
             onChange={ onInputChange }
           />
