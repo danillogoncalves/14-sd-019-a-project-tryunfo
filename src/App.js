@@ -8,13 +8,14 @@ class App extends React.Component {
     this.state = {
       name: '',
       destription: '',
-      attr1: '',
-      attr2: '',
-      attr3: '',
+      attr1: '0',
+      attr2: '0',
+      attr3: '0',
       image: '',
       rare: 'normal',
       trunfo: false,
       button: true,
+      saveState: [],
     };
   }
 
@@ -45,8 +46,8 @@ class App extends React.Component {
     });
     const { attr1, attr2, attr3 } = this.state;
     const sumMax = 210;
-    const ResultSum = Number(attr1) + Number(attr2) + Number(attr3) <= sumMax;
-    return (resultMinMax === true && ResultSum === true);
+    const ResultSum = +attr1 + +attr2 + +attr3 <= sumMax;
+    return (resultMinMax && ResultSum);
   }
 
   enableDisableButton = () => {
@@ -67,7 +68,32 @@ class App extends React.Component {
 
   onSaveButtonClick = (event) => {
     event.preventDefault();
-    console.log(event.target);
+    const {
+      name, destription, attr1, attr2, attr3, image, rare, trunfo, saveState,
+    } = this.state;
+    const save = {
+      name,
+      destription,
+      attr1,
+      attr2,
+      attr3,
+      image,
+      rare,
+      trunfo,
+    };
+    this.setState({
+      saveState: [...saveState, save],
+    }, () => this.setState({
+      name: '',
+      destription: '',
+      attr1: '0',
+      attr2: '0',
+      attr3: '0',
+      image: '',
+      rare: 'normal',
+      trunfo: false,
+      button: true,
+    }));
   }
 
   render() {
