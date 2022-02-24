@@ -1,4 +1,5 @@
 import React from 'react';
+import Deck from './components/ Deck';
 import Card from './components/Card';
 import Form from './components/Form';
 
@@ -116,6 +117,7 @@ class App extends React.Component {
       trunfo,
       button,
       hasTrunfo,
+      saveState,
     } = this.state;
     return (
       <>
@@ -146,6 +148,18 @@ class App extends React.Component {
           cardRare={ rare }
           cardTrunfo={ trunfo }
         />
+        <h1>Todas as cartas</h1>
+        {saveState.map((elment, index) => (<Deck
+          key={ index }
+          cardName={ elment.name }
+          cardDescription={ elment.destription }
+          cardAttr1={ elment.attr1 }
+          cardAttr2={ elment.attr2 }
+          cardAttr3={ elment.attr3 }
+          cardImage={ elment.image }
+          cardRare={ elment.rare }
+          cardTrunfo={ elment.trunfo }
+        />))}
       </>
     );
   }
