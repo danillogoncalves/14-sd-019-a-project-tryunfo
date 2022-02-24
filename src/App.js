@@ -15,6 +15,7 @@ class App extends React.Component {
       rare: 'normal',
       trunfo: false,
       button: true,
+      hasTrunfo: false,
       saveState: [],
     };
   }
@@ -66,6 +67,14 @@ class App extends React.Component {
     }, () => this.enableDisableButton());
   }
 
+  varifyHasTrunfo = () => {
+    const { saveState } = this.state;
+    this.setState({
+      hasTrunfo: saveState.some((element) => element.trunfo),
+    });
+    // console.log(this.state.saveState);
+  }
+
   onSaveButtonClick = (event) => {
     event.preventDefault();
     const {
@@ -93,7 +102,7 @@ class App extends React.Component {
       rare: 'normal',
       trunfo: false,
       button: true,
-    }));
+    }, () => this.varifyHasTrunfo()));
   }
 
   render() {
@@ -106,6 +115,7 @@ class App extends React.Component {
       rare,
       trunfo,
       button,
+      hasTrunfo,
     } = this.state;
     return (
       <>
@@ -121,7 +131,7 @@ class App extends React.Component {
           cardImage={ image }
           cardRare={ rare }
           cardTrunfo={ trunfo }
-          hasTrunfo={ false }
+          hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ button }
           onInputChange={ this.onInputChange }
           onSaveButtonClick={ this.onSaveButtonClick }
