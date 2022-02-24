@@ -11,6 +11,7 @@ class Deck extends Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      onDeleteButtonClick,
     } = this.props;
     return (
       <section>
@@ -66,6 +67,13 @@ class Deck extends Component {
             cardTrunfo ? <span data-testid="trunfo-card">Super Trunfo</span> : ''
           }
         </div>
+        <button
+          data-testid="delete-button"
+          type="button"
+          onClick={ onDeleteButtonClick }
+        >
+          Excluir
+        </button>
       </section>
     );
   }
@@ -80,6 +88,7 @@ Deck.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
+  onDeleteButtonClick: PropTypes.func.isRequired,
 };
 
 export default Deck;

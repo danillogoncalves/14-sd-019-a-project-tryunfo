@@ -1,5 +1,5 @@
 import React from 'react';
-import Deck from './components/ Deck';
+import Deck from './components/Deck';
 import Card from './components/Card';
 import Form from './components/Form';
 
@@ -105,6 +105,18 @@ class App extends React.Component {
       button: true,
     }, () => this.varifyHasTrunfo()));
   }
+  // Ajuda do Leo Araujo - Turma 19 - Tribo A(sync que se coda) para criar esse querySelector
+
+  onDeleteButtonClick = ({ target }) => {
+    const nameToBeDeleted = target
+      .parentElement.querySelector('span[data-testid=name-card]')
+      .innerText;
+    const { saveState } = this.state;
+    const newSaveState = saveState.filter(({ name }) => name !== nameToBeDeleted);
+    this.setState({
+      saveState: newSaveState,
+    }, () => this.varifyHasTrunfo());
+  }
 
   render() {
     const { name,
@@ -149,16 +161,17 @@ class App extends React.Component {
           cardTrunfo={ trunfo }
         />
         <h1>Todas as cartas</h1>
-        {saveState.map((elment, index) => (<Deck
+        {saveState.map((element, index) => (<Deck
           key={ index }
-          cardName={ elment.name }
-          cardDescription={ elment.destription }
-          cardAttr1={ elment.attr1 }
-          cardAttr2={ elment.attr2 }
-          cardAttr3={ elment.attr3 }
-          cardImage={ elment.image }
-          cardRare={ elment.rare }
-          cardTrunfo={ elment.trunfo }
+          cardName={ element.name }
+          cardDescription={ element.destription }
+          cardAttr1={ element.attr1 }
+          cardAttr2={ element.attr2 }
+          cardAttr3={ element.attr3 }
+          cardImage={ element.image }
+          cardRare={ element.rare }
+          cardTrunfo={ element.trunfo }
+          onDeleteButtonClick={ this.onDeleteButtonClick }
         />))}
       </>
     );
