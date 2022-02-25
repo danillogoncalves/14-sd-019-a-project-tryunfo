@@ -128,8 +128,6 @@ class App extends React.Component {
       const nameLowerCase = name.toLowerCase();
       return nameLowerCase.includes(inputLowerCase);
     });
-    console.log(result);
-    console.log(target);
     this.setState({
       [target.name]: target.value,
       filter: result,
