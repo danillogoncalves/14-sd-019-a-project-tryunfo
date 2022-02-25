@@ -19,6 +19,8 @@ class App extends React.Component {
       button: true,
       hasTrunfo: false,
       saveState: [],
+      nameFilter: '',
+      filter: [],
     };
   }
 
@@ -66,7 +68,7 @@ class App extends React.Component {
       : value;
     this.setState({
       [name]: typeOfInput,
-    }, () => this.enableDisableButton());
+    }, this.enableDisableButton);
   }
 
   varifyHasTrunfo = () => {
@@ -94,7 +96,7 @@ class App extends React.Component {
     };
     this.setState({
       saveState: [...saveState, save],
-    }, () => this.setState({
+    }, this.setState({
       name: '',
       destription: '',
       attr1: '0',
@@ -104,7 +106,7 @@ class App extends React.Component {
       rare: 'normal',
       trunfo: false,
       button: true,
-    }, () => this.varifyHasTrunfo()));
+    }, this.varifyHasTrunfo));
   }
   // Ajuda do Leo Araujo - Turma 19 - Tribo A(sync que se coda) para criar esse querySelector
   // .parentElement.querySelector('span[data-testid=name-card]').innerText;
@@ -116,7 +118,7 @@ class App extends React.Component {
     const newSaveState = saveState.filter(({ name }) => name !== nameToBeDeleted);
     this.setState({
       saveState: newSaveState,
-    }, () => this.varifyHasTrunfo());
+    }, this.varifyHasTrunfo);
   }
 
   onInputFilterChange = ({ target }) => {
@@ -126,8 +128,12 @@ class App extends React.Component {
       const nameLowerCase = name.toLowerCase();
       return nameLowerCase.includes(inputLowerCase);
     });
-    // console.log(result);
-    return result;
+    console.log(result);
+    console.log(target);
+    this.setState({
+      [target.name]: target.value,
+      filter: result,
+    });
   }
 
   render() {
@@ -142,6 +148,8 @@ class App extends React.Component {
       button,
       hasTrunfo,
       saveState,
+      nameFilter,
+      filter,
     } = this.state;
     return (
       <>
@@ -173,19 +181,25 @@ class App extends React.Component {
           cardTrunfo={ trunfo }
         />
         <h1>Todas as cartas</h1>
-        <Filter onInputFilterChange={ this.onInputFilterChange } />
-        {saveState.map((element, index) => (<Deck
-          key={ index }
-          cardName={ element.name }
-          cardDescription={ element.destription }
-          cardAttr1={ element.attr1 }
-          cardAttr2={ element.attr2 }
-          cardAttr3={ element.attr3 }
-          cardImage={ element.image }
-          cardRare={ element.rare }
-          cardTrunfo={ element.trunfo }
-          onDeleteButtonClick={ this.onDeleteButtonClick }
-        />))}
+        <Filter
+          onInputFilterChange={ this.onInputFilterChange }
+          nameFilter={ nameFilter }
+        />
+        {(filter.length || nameFilter
+          ? filter
+          : saveState)
+          .map((element, index) => (<Deck
+            key={ index }
+            cardName={ element.name }
+            cardDescription={ element.destription }
+            cardAttr1={ element.attr1 }
+            cardAttr2={ element.attr2 }
+            cardAttr3={ element.attr3 }
+            cardImage={ element.image }
+            cardRare={ element.rare }
+            cardTrunfo={ element.trunfo }
+            onDeleteButtonClick={ this.onDeleteButtonClick }
+          />))}
       </>
     );
   }

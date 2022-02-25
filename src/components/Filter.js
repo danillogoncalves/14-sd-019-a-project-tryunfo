@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 
 class Filter extends Component {
   render() {
-    const { onInputFilterChange } = this.props;
+    const { onInputFilterChange, nameFilter } = this.props;
     return (
       <input
         data-testid="name-filter"
         type="text"
+        name="nameFilter"
+        value={ nameFilter }
         onChange={ onInputFilterChange }
       />
     );
@@ -16,6 +18,7 @@ class Filter extends Component {
 
 Filter.propTypes = {
   onInputFilterChange: PropTypes.func.isRequired,
+  nameFilter: PropTypes.string.isRequired,
 };
 
 export default Filter;
