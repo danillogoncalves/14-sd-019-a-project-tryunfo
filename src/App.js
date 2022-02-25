@@ -106,11 +106,11 @@ class App extends React.Component {
     }, () => this.varifyHasTrunfo()));
   }
   // Ajuda do Leo Araujo - Turma 19 - Tribo A(sync que se coda) para criar esse querySelector
+  // .parentElement.querySelector('span[data-testid=name-card]').innerText;
+  // Com ajuda da Luá - Turma 19 - Tribo A, descobri com arrumar o erro nos testes.
 
   onDeleteButtonClick = ({ target }) => {
-    const nameToBeDeleted = target
-      .parentElement.querySelector('span[data-testid=name-card]')
-      .innerText;
+    const nameToBeDeleted = target.value;
     const { saveState } = this.state;
     const newSaveState = saveState.filter(({ name }) => name !== nameToBeDeleted);
     this.setState({

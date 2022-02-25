@@ -19,7 +19,7 @@ class Deck extends Component {
           <span
             data-testid="name-card"
           >
-            {cardName}
+            { cardName }
           </span>
         </div>
         <div>
@@ -69,6 +69,7 @@ class Deck extends Component {
         </div>
         <button
           data-testid="delete-button"
+          value={ cardName }
           type="button"
           onClick={ onDeleteButtonClick }
         >
