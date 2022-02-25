@@ -2,6 +2,7 @@ import React from 'react';
 import Deck from './components/Deck';
 import Card from './components/Card';
 import Form from './components/Form';
+import Filter from './components/Filter';
 
 class App extends React.Component {
   constructor() {
@@ -118,6 +119,17 @@ class App extends React.Component {
     }, () => this.varifyHasTrunfo());
   }
 
+  onInputFilterChange = ({ target }) => {
+    const inputLowerCase = target.value.toLowerCase();
+    const { saveState } = this.state;
+    const result = saveState.filter(({ name }) => {
+      const nameLowerCase = name.toLowerCase();
+      return nameLowerCase.includes(inputLowerCase);
+    });
+    // console.log(result);
+    return result;
+  }
+
   render() {
     const { name,
       destription,
@@ -161,6 +173,7 @@ class App extends React.Component {
           cardTrunfo={ trunfo }
         />
         <h1>Todas as cartas</h1>
+        <Filter onInputFilterChange={ this.onInputFilterChange } />
         {saveState.map((element, index) => (<Deck
           key={ index }
           cardName={ element.name }
