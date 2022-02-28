@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 class Filter extends Component {
   render() {
-    const { onInputFilterChange, nameFilter } = this.props;
+    const { onInputFilterChange, onSelectFilterCharge, onCheckboxFilterClick,
+      nameFilter, nameFilterDisabled,
+      rareFilter, rareFilterDisabled, trunfoFilter } = this.props;
     return (
       <>
         <input
@@ -11,10 +13,15 @@ class Filter extends Component {
           type="text"
           name="nameFilter"
           value={ nameFilter }
+          disabled={ nameFilterDisabled }
           onChange={ onInputFilterChange }
         />
         <select
           data-testid="rare-filter"
+          name="rareFilter"
+          value={ rareFilter }
+          disabled={ rareFilterDisabled }
+          onChange={ onSelectFilterCharge }
         >
           <option value="todas">todas</option>
           <option value="normal">normas</option>
@@ -24,6 +31,9 @@ class Filter extends Component {
         <input
           data-testid="trunfo-filter"
           type="checkbox"
+          name="trunfoFilter"
+          checked={ trunfoFilter }
+          onChange={ onCheckboxFilterClick }
         />
         <span>Super Trype Trunfo</span>
       </>
@@ -33,7 +43,13 @@ class Filter extends Component {
 
 Filter.propTypes = {
   onInputFilterChange: PropTypes.func.isRequired,
+  onSelectFilterCharge: PropTypes.func.isRequired,
+  onCheckboxFilterClick: PropTypes.func.isRequired,
   nameFilter: PropTypes.string.isRequired,
+  nameFilterDisabled: PropTypes.bool.isRequired,
+  rareFilter: PropTypes.string.isRequired,
+  rareFilterDisabled: PropTypes.bool.isRequired,
+  trunfoFilter: PropTypes.bool.isRequired,
 };
 
 export default Filter;
