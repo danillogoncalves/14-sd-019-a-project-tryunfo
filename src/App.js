@@ -225,6 +225,7 @@ class App extends React.Component {
           rareFilterDisabled={ rareFilterDisabled }
           trunfoFilter={ trunfoFilter }
         />
+        {/* Lalá Nametala - Turma 19 - Tribo A me ajudo a pensar na logica do if ternário */}
         {(filter.length || nameFilter || rareFilter !== 'todas' || trunfoFilter
           ? filter
           : saveState)
